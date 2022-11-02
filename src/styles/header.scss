@@ -1,0 +1,35 @@
+.header {
+		position: relative;
+		&::after {
+				content: "";
+				position: absolute;
+				height: 1px;
+				background: #E6E6E6;
+				width: 100%;
+				bottom: 0;
+			}
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		min-height: 90px;
+		align-items: center;
+		column-gap: 30px;
+	}
+
+	&__logo {}
+
+	&__content {
+		display: inline-flex;
+		column-gap: 40px;
+	}
+	&__title {
+		font-family: 'Libre Franklin';
+		font-size: 14px;
+		line-height: 171%;
+		color: #000000;
+		transition: all 0.3s ease 0s;
+	&:hover{
+		color: #d18888;
+	}
+	}
+}
