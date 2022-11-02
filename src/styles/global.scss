@@ -13,10 +13,11 @@ $fontSize: 16px;
 
 
 [class*="__container"] {
-	max-width: 1200px;
+	max-width: 1230px;
 	margin: 0px auto;
 	padding: 0px 15px;
 }
 
 @import './null.scss';
 @import './header.scss';
+@import './home.scss';
