@@ -11,13 +11,48 @@ $fontSize: 16px;
 	overflow: hidden;
 }
 
-
 [class*="__container"] {
 	max-width: 1230px;
 	margin: 0px auto;
 	padding: 0px 15px;
 }
 
+.label {
+	font-family: 'Libre Franklin';
+	font-size: 10px;
+	line-height: 1.2;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #999999;
+}
+
+.title {
+	font-family: 'Tenor Sans';
+	text-transform: uppercase;
+	color: $mainColor;
+	font-size: 24px;
+	line-height: 1.2;
+}
+
+.text {
+	font-family: 'Source Serif Pro';
+	font-size: 16px;
+	line-height: 1.5;
+	color: #666666;
+}
+
+.autor {
+	font-family: 'Libre Franklin';
+	font-weight: 700;
+	font-size: 10px;
+	line-height: 1.2;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #000000;
+
+}
+
 @import './null.scss';
 @import './header.scss';
 @import './home.scss';
+@import './news.scss';

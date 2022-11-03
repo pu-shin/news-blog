@@ -1,0 +1,83 @@
+.news {
+	padding: 60px 0px 60px 0px;
+	&__container {
+
+	}
+	&__label {
+		&:not(:last-child) {
+			margin-bottom: 30px
+		}
+	}
+
+	&__button {
+		display: block;
+		padding: 10px 15px;
+		border: 1px solid #000000;
+		margin: 0 auto;
+		span{
+		font-family: 'Libre Franklin';
+		font-size: 10px;
+		line-height: 1.2;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: $mainColor;
+		}
+	}
+}
+.body-news {
+&:not(:last-child) {
+	margin-bottom: 60px;
+}
+@media (max-width: 767.98px) {
+&:not(:last-child) {
+	margin-bottom: 30px;
+	}
+}
+	&__cards {
+	display: flex;
+	flex-wrap: wrap;
+	flex: 0 1 33.333%;
+	gap: 19.5px;
+	}
+
+}
+
+.card {
+	flex: 1 1 387px;
+	min-width: 300px;
+	height: 100%;
+	padding-bottom: 50px;
+	&__image {
+		position: relative;
+		padding: 0px 0px 65.633% 0px;
+		&:not(:last-child) {
+				margin-bottom: 20px
+			}
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+		}
+}
+
+.body-card {
+	display: flex;
+	flex-direction: column;
+	&__label {
+		&:not(:last-child) {
+				margin-bottom: 18px
+			}
+	}
+
+	&__title {
+		&:not(:last-child) {
+				margin-bottom: 15px
+			}
+	}
+
+	&__autor {}
+}
