@@ -1,0 +1,20 @@
+.footer {
+	padding: 45px 0px 45px 0px;
+	background-color: #141414;
+	@media (max-width: 479.98px) {
+	padding: 25px 0px 25px 0px;
+					}
+	&__container {
+	}
+
+}
+
+.title-footer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	align-items: end;
+	&__image {}
+
+	&__label {}
+}

@@ -8,7 +8,18 @@ $fontSize: 16px;
 
 .wrapper {
 	min-height: 100%;
+	display: flex;
+	flex-direction: column;
 	overflow: hidden;
+
+	// Прижимаем footer
+	>main {
+		flex: 1 1 auto;
+	}
+	// Фикс для слайдеров
+	>* {
+		min-width: 0;
+	}
 }
 
 [class*="__container"] {
@@ -56,3 +67,4 @@ $fontSize: 16px;
 @import './header.scss';
 @import './home.scss';
 @import './news.scss';
+@import './footer.scss';

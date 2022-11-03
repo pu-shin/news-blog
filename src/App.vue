@@ -5,6 +5,7 @@
       <app-home></app-home>
       <app-news></app-news>
     </main>
+    <app-footer></app-footer>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import AppHeader from "@/components/AppHeader.vue";
 import AppHome from "@/components/AppHome.vue";
 import AppNews from "@/components/AppNews.vue";
+import AppFooter from "@/components/AppFooter.vue";
 
 export default {
   name: "App",
@@ -22,6 +24,7 @@ export default {
     AppHeader,
     AppHome,
     AppNews,
+    AppFooter,
   },
 };
 </script>
