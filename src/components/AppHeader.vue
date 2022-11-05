@@ -5,8 +5,10 @@
         <img src="../assets/logo/logo-black.svg" alt="logo" />
       </div>
       <div class="header__content">
-        <a href="" class="header__title">Home</a>
-        <a href="" class="header__title">News Writting</a>
+        <router-link to="/" class="header__title">Home</router-link>
+        <router-link to="/news-writing" class="header__title"
+          >News Writing</router-link
+        >
       </div>
     </div>
   </header>

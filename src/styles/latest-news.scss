@@ -9,18 +9,23 @@
 		}
 	}
 
-	&__button {
+	&__show-more {
 		display: block;
 		padding: 10px 15px;
 		border: 1px solid #000000;
 		margin: 0 auto;
+		color: $mainColor;
+		transition: all 0.3s ease 0s;
 		span{
 		font-family: 'Libre Franklin';
 		font-size: 10px;
 		line-height: 1.2;
 		letter-spacing: 1px;
 		text-transform: uppercase;
-		color: $mainColor;
+		}
+		&:hover {
+			background-color: black;
+			color: white;
 		}
 	}
 }
@@ -79,5 +84,5 @@
 			}
 	}
 
-	&__autor {}
+	&__author {}
 }

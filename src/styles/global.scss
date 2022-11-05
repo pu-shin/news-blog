@@ -6,12 +6,14 @@ $mainColor: #000000;
 $fontFamily:  'Source Serif Pro';
 $fontSize: 16px;
 
+#app {
+	height: 100%;
+}
 .wrapper {
 	min-height: 100%;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-
 	// Прижимаем footer
 	>main {
 		flex: 1 1 auto;
@@ -52,7 +54,7 @@ $fontSize: 16px;
 	color: #666666;
 }
 
-.autor {
+.author {
 	font-family: 'Libre Franklin';
 	font-weight: 700;
 	font-size: 10px;
@@ -65,6 +67,7 @@ $fontSize: 16px;
 
 @import './null.scss';
 @import './header.scss';
-@import './home.scss';
-@import './news.scss';
+@import './top-news.scss';
+@import './latest-news.scss';
 @import './footer.scss';
+@import './form.scss';

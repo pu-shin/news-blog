@@ -2,8 +2,7 @@
   <div class="wrapper">
     <app-header></app-header>
     <main class="mainpage">
-      <app-home></app-home>
-      <app-news></app-news>
+      <router-view></router-view>
     </main>
     <app-footer></app-footer>
   </div>
@@ -11,8 +10,6 @@
 
 <script>
 import AppHeader from "@/components/AppHeader.vue";
-import AppHome from "@/components/AppHome.vue";
-import AppNews from "@/components/AppNews.vue";
 import AppFooter from "@/components/AppFooter.vue";
 
 export default {
@@ -22,8 +19,6 @@ export default {
   },
   components: {
     AppHeader,
-    AppHome,
-    AppNews,
     AppFooter,
   },
 };

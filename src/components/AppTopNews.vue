@@ -13,7 +13,7 @@
           Enim omittam qui id, ex quo atqui dictas complectitur. Nec ad timeam
           accusata, hinc justo falli id eum, ferri novum molestie eos cu.
         </p>
-        <span class="content-home__autor autor">by Reta Torphy</span>
+        <span class="content-home__ author author">by Reta Torphy</span>
       </div>
     </div>
   </section>

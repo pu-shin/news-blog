@@ -17,13 +17,13 @@
               <h1 class="body-card__title title">
                 Japan House opens in mountainside to foster peak creativity.
               </h1>
-              <span class="body-card__autor autor">by Reta Torphy</span>
+              <span class="body-card__author author">by Reta Torphy</span>
             </div>
           </div>
         </div>
       </div>
-      <button type="button" class="news__button">
-        <span>view all news</span>
+      <button type="button" class="news__show-more">
+        <span>show more</span>
       </button>
     </div>
   </section>
