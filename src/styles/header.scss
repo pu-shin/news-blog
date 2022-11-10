@@ -1,13 +1,13 @@
 .header {
-		position: relative;
-		&::after {
-				content: "";
-				position: absolute;
-				height: 1px;
-				background: #E6E6E6;
-				width: 100%;
-				bottom: 0;
-			}
+position: relative;
+&::after {
+		content: "";
+		position: absolute;
+		height: 1px;
+		background: #E6E6E6;
+		width: 100%;
+		bottom: 0;
+	}
 	&__container {
 		display: flex;
 		justify-content: space-between;
@@ -18,18 +18,25 @@
 
 	&__logo {}
 
-	&__content {
+	&__navigation {
 		display: inline-flex;
-		column-gap: 40px;
+		column-gap: 30px;
+		align-items: center;
 	}
 	&__title {
 		font-family: 'Libre Franklin';
-		font-size: 14px;
+		font-size: 13px;
 		line-height: 1.71;
 		color: #000000;
 		transition: all 0.3s ease 0s;
+		text-transform: uppercase;
 	&:hover{
 		color: #d18888;
 	}
 	}
+}
+.sign-out {
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+	border-radius: 5px;
+	padding: 5px 7.5px;
 }
