@@ -48,10 +48,13 @@
 }
 
 .card {
-	flex: 1 1 387px;
+	flex: 0 1 387px;
 	min-width: 300px;
 	height: 100%;
 	padding-bottom: 50px;
+	@media (max-width: 1261.98px) {
+		}
+
 	&__image {
 		position: relative;
 		padding: 0px 0px 65.633% 0px;
@@ -64,7 +67,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			object-fit: contain;
+			object-fit: cover;
 		}
 		}
 }

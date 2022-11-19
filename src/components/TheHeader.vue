@@ -9,7 +9,7 @@
         <router-link to="/news-writing" class="header__title"
           >News Writing</router-link
         >
-        <router-link to="/registration" class="header__title"
+        <router-link to="/registration" class="header__title" v-if="!isLoggedIn"
           >Registration</router-link
         >
         <router-link to="/sign-in" class="header__title" v-if="!isLoggedIn"
