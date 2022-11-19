@@ -2,7 +2,7 @@
   <section class="registration">
     <div class="registration__container">
       <h1 class="registration__title title">Create an Account</h1>
-      <div class="registration__body">
+      <div class="registration__body" @keyup.enter="registration">
         <input
           class="registration__item item"
           type="text"
@@ -15,6 +15,7 @@
           placeholder="Password"
           v-model="password"
         />
+        <p class="registration__message message" v-if="errMsg">{{ errMsg }}</p>
         <button
           class="registration__button button"
           type="submit"
@@ -35,6 +36,7 @@ export default {
     return {
       email: "",
       password: "",
+      errMsg: "",
     };
   },
   methods: {
@@ -46,8 +48,21 @@ export default {
           this.$router.push("/");
         })
         .catch((error) => {
-          console.log(error.code);
           console.log(error.message);
+          switch (error.code) {
+            case "auth/invalid-email":
+              this.errMsg = "* Invalid email";
+              break;
+            case "auth/user-not-found":
+              this.errMsg = "* No account with that email was found";
+              break;
+            case "auth/wrong-password":
+              this.errMsg = "* Incorrect password";
+              break;
+            default:
+              this.errMsg = "* Email or password was incorrect";
+              break;
+          }
         });
     },
   },

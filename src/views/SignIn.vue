@@ -2,7 +2,7 @@
   <section class="sign-in">
     <div class="sign-in__container">
       <h1 class="sign-in__title title">Sign in to an Account</h1>
-      <div class="sign-in__body">
+      <div class="sign-in__body" @keyup.enter="login">
         <input
           class="sign-in__item item"
           type="text"
@@ -15,7 +15,7 @@
           placeholder="Password"
           v-model="password"
         />
-        <p class="sign-in__message" v-if="errMsg">{{ errMsg }}</p>
+        <p class="sign-in__message message" v-if="errMsg">{{ errMsg }}</p>
         <button class="sign-in__button button" type="submit" @click="login">
           Submit
         </button>

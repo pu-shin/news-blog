@@ -54,6 +54,10 @@ $fontSize: 16px;
 		background-color: black;
 		color: white;
 	}
+	&:active {
+		background-color: white;
+		color: black;
+	}
 }
 
 .label {
@@ -90,6 +94,9 @@ $fontSize: 16px;
 	color: #000000;
 
 }
+.message {
+	color: red;
+}
 
 @import './null.scss';
 @import './header.scss';
@@ -99,3 +106,5 @@ $fontSize: 16px;
 @import './form.scss';
 @import './registration.scss';
 @import './sign-in.scss';
+@import './load-file.scss';
+@import './loader.scss';
