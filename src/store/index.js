@@ -1,29 +1,46 @@
 import { createStore } from 'vuex'
-import axios from "axios";
+import { HTTP } from '@/axios';
+import { getDatabase, ref, query, limitToLast, onValue } from "firebase/database";
 
 export default createStore({
 	state() {
 		return {
 			news: [],
-			url: "https://pu-shin-news-blog-5996b-default-rtdb.europe-west1.firebasedatabase.app/news.json",
+			loading: false,
+			dataLength: null,
 		}
 	},
 	getters: {
 	},
 	mutations: {
 		initNews(state, payload) {
-			state.news = payload;
+			state.news = payload.reverse();
 		},
-		pushNews(state, payload) {
-			state.news.push(payload)
-		}
+		setDataLength(state, payload) {
+			state.dataLength = payload
+		},
+		showLoader(state, payload) {
+			state.loading = payload;
+		},
 	},
 
 	actions: {
-		async uploadNews({ commit, state }) {
+		unloadNews({ commit, dispatch }, amount) {
+			commit('showLoader', true)
+			dispatch('setNews', amount)
+		},
+		async addOwnNews(context, payload) {
 			try {
-				const { data } = await axios.get(state.url);
-				if (!data) return
+				const response = await HTTP.post('/news.json', payload);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		setNews({ state, commit }, amount) {
+			const db = getDatabase();
+			const recentPostsRef = query(ref(db, 'news/'), limitToLast(amount));
+			onValue(recentPostsRef, (posts) => {
+				const data = posts.val() ? posts.val() : [];
 				const modifiedData = Object.keys(data).map((key) => {
 					return {
 						id: key,
@@ -31,19 +48,17 @@ export default createStore({
 					};
 				});
 				commit('initNews', modifiedData)
-			} catch (error) {
-				console.log(error);
-			}
+				commit('showLoader', false)
+			});
 		},
-		async addNews({ commit, state }, payload) {
-			try {
-				const { data: { name } } = await axios.post(state.url, payload);
-				commit('pushNews', { ...payload, id: name })
-			} catch (error) {
-				console.log(error);
-			}
+		getNewsLength({ commit }) {
+			const db = getDatabase();
+			const recentPostsRef = query(ref(db, 'news/'));
+			onValue(recentPostsRef, (posts) => {
+				commit('setDataLength', posts.size)
+			})
 		},
+
 	},
-	modules: {
-	}
+	modules: {}
 })

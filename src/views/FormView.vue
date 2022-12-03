@@ -1,5 +1,5 @@
 <template>
-  <section class="create-news" v-if="!loading">
+  <section class="create-news">
     <div class="create-news__container">
       <h1 class="create-news__title title">Create News</h1>
       <form class="create-news__form form" @submit.prevent>
@@ -46,32 +46,31 @@
           />
         </div>
         <div class="form__united-row">
-          <div class="form__file">
-            <div class="load-file">
-              <h3 class="load-file__title form__label">Image</h3>
-              <div class="load-file__content file-content">
-                <div class="file-content__task">
-                  <app-drop-zone
-                    format="image/jpeg"
-                    :disabled="limitImages"
-                    @drop-file="addImage"
-                    @add-file="addImage"
-                  >
-                  </app-drop-zone>
-                </div>
-                <div class="file-content__task">
-                  <div class="file-content__picture file-picture">
-                    <div class="file-picture__body" v-if="images.length">
-                      <img
-                        class="file-picture__item"
-                        :src="images.at(-1).url"
-                        alt=""
-                      />
-                      <button
-                        class="file-picture__remove-item"
-                        @click="delImage(index)"
-                      ></button>
-                    </div>
+          <div class="form__file load-file">
+            <h5 class="load-file__title form__label">Image</h5>
+            <div class="load-file__content file-content">
+              <div class="file-content__task file-content__dropzone">
+                <app-drop-zone
+                  format="image/jpeg"
+                  :disabled="limitImages"
+                  @drop-file="addImage"
+                  @add-file="addImage"
+                >
+                </app-drop-zone>
+              </div>
+              <div class="file-content__task">
+                <div class="file-content__picture file-picture">
+                  <div class="file-picture__body" v-if="images.length">
+                    <img
+                      class="file-picture__item"
+                      :src="images.at(-1).url"
+                      alt=""
+                    />
+                    <button
+                      type="button"
+                      class="file-picture__remove-item"
+                      @click="delImage(index)"
+                    ></button>
                   </div>
                 </div>
               </div>
@@ -80,14 +79,14 @@
           <div class="form__buttons">
             <button
               class="form__button button"
-              type="submit"
+              type="button"
               @click="clearInputs()"
             >
               Clear
             </button>
             <button
               class="form__button button"
-              type="submit"
+              type="button"
               @click="preview = !preview"
             >
               Preview
@@ -95,53 +94,43 @@
             <button
               class="form__button button"
               type="submit"
-              @click="uploadImage()"
+              @click="uploadNews()"
             >
               Add news
             </button>
           </div>
         </div>
       </form>
-
-      <div class="create-news__preview preview home" v-if="preview">
-        <h2 class="preview__title title">Preview</h2>
-        <div class="preview__body">
-          <div class="preview__image home__image">
-            <img
-              :src="images.at(-1).url"
-              alt="foto news"
-              v-if="images.length"
-            />
-          </div>
-          <div class="preview__content content-preview content-home">
-            <span class="content-preview__label content-home__label label">{{
-              typeNews
-            }}</span>
-            <h1 class="content-preview__title content-home__title title">
-              Japan House opens in mountainside to foster peak creativity.
-            </h1>
-            <p class="content-preview__text content-home__text text">
-              Enim omittam qui id, ex quo atqui dictas complectitur. Nec ad
-              timeam accusata, hinc justo falli id eum, ferri novum molestie eos
-              cu.
-            </p>
-            <span class="content-preview__author content-home__author author"
-              >by Reta Torphy</span
-            >
-          </div>
+    </div>
+    <div class="top-news preview" v-if="preview">
+      <div class="top-news__container preview__body">
+        <div class="top-news__image">
+          <img :src="images.at(-1).url" alt="" />
+        </div>
+        <div class="top-news__content content-top-news">
+          <span class="content-top-news__label label">
+            {{ objNews.type }}
+          </span>
+          <h1 class="content-top-news__title title">
+            {{ objNews.title }}
+          </h1>
+          <p class="content-top-news__desc desc">
+            {{ objNews.desc }}
+          </p>
+          <span class="content-top-news__author author">
+            {{ objNews.author }}
+          </span>
         </div>
       </div>
     </div>
   </section>
-  <app-loader v-if="loading"></app-loader>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase";
+import { mapActions, mapMutations } from "vuex";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import AppDropZone from "../components/AppDropZone.vue";
-import AppLoader from "../components/AppLoader.vue";
+import AppTopNews from "../components/AppTopNews.vue";
 
 export default {
   mounted() {},
@@ -153,52 +142,66 @@ export default {
         title: "",
         desc: "",
       },
+      imageName: "",
       url: "",
       images: [],
       file: {},
-      loading: false,
       preview: false,
     };
   },
   methods: {
-    ...mapActions(["addNews"]),
+    ...mapActions(["addOwnNews"]),
+    ...mapMutations(["showLoader"]),
+
     clearInputs() {
       for (let key in this.objNews) {
         this.objNews[key] = "";
       }
       this.delImage(0);
     },
-    setDataNews() {
+
+    sendDataNews() {
       const dataNews = {
         ...this.objNews,
         image: this.url,
+        imageName: this.imageName,
       };
-      this.addNews(dataNews);
+      this.addOwnNews(dataNews);
       this.clearInputs();
     },
-    async uploadImage() {
-      try {
-        this.loading = true;
-        const file = this.file;
-        const storageRef = ref(storage, `/images/${file.name}`);
-        await uploadBytes(storageRef, file);
-        this.url = await getDownloadURL(ref(storage, `/images/${file.name}`));
-        this.setDataNews();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.loading = false;
-      }
-    },
-    async addImage(event, type) {
+
+    addImage(event, type) {
       const file =
         type === "change" ? event.target.files[0] : event.dataTransfer.files[0];
       this.file = file;
+      if (!file || file.type !== "image/jpeg") return;
       this.images.push({
-        size: file.size,
         url: URL.createObjectURL(file),
       });
     },
+
+    async sendImageToStorage() {
+      const storage = getStorage();
+      const fileName = Date.now() + ".jpg";
+      this.imageName = fileName;
+      const storageRef = ref(storage, `images/${fileName}`);
+      await uploadBytes(storageRef, this.file);
+      this.url = await getDownloadURL(ref(storage, `/images/${fileName}`));
+    },
+
+    async uploadNews() {
+      try {
+        this.showLoader(true);
+        await this.sendImageToStorage();
+        this.sendDataNews();
+        console.log("Upload successful");
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.showLoader(false);
+      }
+    },
+
     delImage(index) {
       this.images.splice(index, 1);
     },
@@ -210,7 +213,7 @@ export default {
   },
   components: {
     AppDropZone,
-    AppLoader,
+    AppTopNews,
   },
 };
 </script>
