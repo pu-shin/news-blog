@@ -16,14 +16,8 @@
           v-model="password"
         />
         <p class="sign-in__message message" v-if="errMsg">{{ errMsg }}</p>
-        <button class="sign-in__button button" type="submit" @click="login">
-          Submit
-        </button>
-        <button
-          class="sign-in__button button"
-          type="submit"
-          @click="signInWithGoogle"
-        >
+        <button class="sign-in__button button" @click="login">Submit</button>
+        <button class="sign-in__button button" @click="signInWithGoogle">
           Sign In With Google
         </button>
       </div>
@@ -82,7 +76,9 @@ export default {
           console.log("Successfully signet in!");
           this.$router.push("/");
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

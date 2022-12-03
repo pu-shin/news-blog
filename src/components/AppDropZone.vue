@@ -14,7 +14,7 @@
         :class="{ 'dropzone__image-disabled': disabled }"
       ></div>
       <button type="button" class="dropzone__button" v-if="!disabled">
-        select or drag an image
+        {{ dropTitle }}
       </button>
       <input
         class="dropzone__field"
@@ -55,6 +55,13 @@ export default {
     addFile(event, type) {
       this.$emit("add-file", event, type);
       this.$refs["select-file"].value = "";
+    },
+  },
+  computed: {
+    dropTitle() {
+      return window.innerWidth < 680
+        ? "select image"
+        : "select or drag an image";
     },
   },
 };

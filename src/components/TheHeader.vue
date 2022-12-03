@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{ 'menu-open': openMenu }">
     <div class="header__container">
       <div class="header__logo">
         <img src="../assets/logo/logo-black.svg" alt="logo" />
@@ -24,6 +24,14 @@
           Sign Out
         </button>
       </nav>
+      <button
+        type="button"
+        class="icon-menu"
+        @click="initMenu"
+        v-click-outside="removeMenu"
+      >
+        <span></span>
+      </button>
     </div>
   </header>
 </template>
@@ -46,6 +54,7 @@ export default {
   data() {
     return {
       isLoggedIn: JSON.parse(localStorage.getItem("auth")) || false,
+      openMenu: false,
     };
   },
   methods: {
@@ -53,6 +62,12 @@ export default {
       signOut(getAuth()).then(() => {
         this.$router.push("/");
       });
+    },
+    initMenu() {
+      this.openMenu = !this.openMenu;
+    },
+    removeMenu() {
+      this.openMenu = false;
     },
   },
 };

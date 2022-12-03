@@ -1,0 +1,25 @@
+.fade-popup-enter-active {
+	transition:  all 0.5s ease-out;
+}
+
+.fade-popup-leave-active {
+	transition:  all 0.5s ease-out 1s;
+}
+
+.fade-popup-enter-from,
+.fade-popup-leave-to {
+	opacity: 0;
+}
+
+.fade-news-move,
+.fade-news-enter-active,
+.fade-news-leave-active{
+	transition: all 0.8s ease;
+}
+.fade-news-enter-from,
+.fade-news-leave-to {
+	opacity: 0;
+}
+.fade-news-leave-active {
+	 position: absolute;
+ }

@@ -1,4 +1,5 @@
 .news {
+	position: relative;
 	padding: 90px 0px 60px 0px;
 	&__container {
 
@@ -23,9 +24,11 @@
 		letter-spacing: 1px;
 		text-transform: uppercase;
 		}
-		&:hover {
-			background-color: black;
+		@media (any-hover: hover) {
+		&:hover{
+			background-color: $mainColor;
 			color: white;
+		}
 		}
 	}
 }
@@ -33,7 +36,7 @@
 &:not(:last-child) {
 	margin-bottom: 60px;
 }
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
 &:not(:last-child) {
 	margin-bottom: 30px;
 	}
@@ -41,19 +44,23 @@
 	&__cards {
 	display: flex;
 	flex-wrap: wrap;
-	flex: 0 1 33.333%;
-	gap: 19.5px;
+	margin: 0px -9.5px;
 	}
 
 }
 
 .card {
-	flex: 0 1 387px;
-	min-width: 300px;
+	padding: 0px 9.5px;
+	flex: 0 1 33.333%;
+	min-width: 200px;
 	height: 100%;
 	padding-bottom: 50px;
-	@media (max-width: 1261.98px) {
-		}
+	@media (max-width: 768px) {
+	flex-basis: 50%;
+	}
+	@media (max-width: 478px) {
+	flex-basis: 100%;
+	}
 
 	&__image {
 		position: relative;
@@ -77,15 +84,13 @@
 	flex-direction: column;
 	&__label {
 		&:not(:last-child) {
-				margin-bottom: 18px
-			}
+			margin-bottom: 18px
+		}
 	}
-
 	&__title {
 		&:not(:last-child) {
-				margin-bottom: 15px
-			}
+			margin-bottom: 15px
+		}
 	}
-
 	&__author {}
 }

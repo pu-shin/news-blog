@@ -30,6 +30,16 @@ $fontSize: 16px;
 	padding: 0px 15px;
 }
 
+[class*="__remove-item"] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(-5px, 5px);
+	width: 30px;
+	height: 30px;
+	background: no-repeat center url("../assets/icons/remove.svg");
+}
+
 .item {
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 	border-radius: 5px;
@@ -39,10 +49,13 @@ $fontSize: 16px;
 	&::placeholder {
 		opacity: 0.7;
 	}
+	@media (max-width: 830px) {
+		height: 40px;
+	}
 }
 
 .button {
-	min-width: 290px;
+	min-width: 100px;
 	padding: 15px 10px;
 	border-radius: 5px;
 	text-transform: uppercase;
@@ -50,13 +63,15 @@ $fontSize: 16px;
 	font-weight: 700;
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 	transition: all 0.3s ease 0s;
-	&:hover {
-		background-color: black;
-		color: white;
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: black;
+			color: white;
+		}
 	}
-	&:active {
-		background-color: white;
-		color: black;
+	@media (max-width: 830px) {
+		padding: 12.5px 8px;
+		font-size: 12px;
 	}
 }
 
@@ -77,7 +92,7 @@ $fontSize: 16px;
 	line-height: 1.2;
 }
 
-.text {
+.desc {
 	font-family: 'Source Serif Pro';
 	font-size: 16px;
 	line-height: 1.5;
@@ -91,11 +106,15 @@ $fontSize: 16px;
 	line-height: 1.2;
 	letter-spacing: 1px;
 	text-transform: uppercase;
-	color: #000000;
+	color: $mainColor;
 
 }
 .message {
 	color: red;
+}
+
+.hidden{
+	visibility: hidden;
 }
 
 @import './null.scss';
@@ -108,3 +127,4 @@ $fontSize: 16px;
 @import './sign-in.scss';
 @import './load-file.scss';
 @import './loader.scss';
+@import './transition.scss';

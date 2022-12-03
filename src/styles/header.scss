@@ -1,6 +1,6 @@
 .header {
-position: relative;
-&::after {
+	position: relative;
+	&::after {
 		content: "";
 		position: absolute;
 		height: 1px;
@@ -8,10 +8,11 @@ position: relative;
 		width: 100%;
 		bottom: 0;
 	}
+
 	&__container {
 		display: flex;
 		justify-content: space-between;
-		min-height: 90px;
+		min-height: 80px;
 		align-items: center;
 		column-gap: 30px;
 	}
@@ -20,23 +21,109 @@ position: relative;
 
 	&__navigation {
 		display: inline-flex;
-		column-gap: 30px;
+		gap: 30px;
 		align-items: center;
+		@media (max-width: 680px) {
+			display: flex;
+			flex-direction: column;
+			padding: 50px 0px 50px 20px;
+			align-items: start;
+			position: absolute;
+			overflow: auto;
+			width: 100%;
+			height: auto;
+			top: 0;
+			left: 100%;
+			transition: left 0.3s ease 0s;
+			background: rgba(000, 000, 000, 0.8);
+			text-align: center;
+			z-index: 99;
+			border-bottom-left-radius: 5px;
+			.menu-open & {
+				left: 50%;
+			}
+		}
 	}
+
 	&__title {
 		font-family: 'Libre Franklin';
 		font-size: 13px;
-		line-height: 1.71;
-		color: #000000;
+		line-height: 1.70;
 		transition: all 0.3s ease 0s;
 		text-transform: uppercase;
-	&:hover{
-		color: #d18888;
-	}
+
+		@media (any-hover: hover) {
+			&:hover {
+				color: #d18888;
+			}
+		}
+
+		@media (max-width: 680px) {
+			font-size: 14px;
+			font-weight: 700;
+			color: #ffffff;
+		}
 	}
 }
+
 .sign-out {
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+	background: none;
 	border-radius: 5px;
 	padding: 5px 7.5px;
+}
+
+.icon-menu {
+	display: none;
+
+	@media (max-width: 680px) {
+		display: block;
+		position: relative;
+		width: 30px;
+		height: 18px;
+		cursor: pointer;
+		z-index: 99;
+
+		span,
+		&::before,
+		&::after {
+			content: "";
+			transition: all 0.3s ease 0s;
+			left: 0%;
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			background-color: black;
+		}
+
+		&::before {
+			top: 0px;
+		}
+
+		&::after {
+			bottom: 0px;
+		}
+
+		span {
+			top: calc(50% - 1px);
+		}
+
+		.menu-open & {
+			span {
+				transform: scale(0);
+			}
+
+			&::before {
+				transform: rotate(-45deg);
+				top: calc(50% - 1px);
+				background-color: white;
+			}
+
+			&::after {
+				transform: rotate(45deg);
+				bottom: calc(50% - 1px);
+				background-color: white;
+			}
+		}
+	}
 }

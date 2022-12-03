@@ -16,11 +16,7 @@
           v-model="password"
         />
         <p class="registration__message message" v-if="errMsg">{{ errMsg }}</p>
-        <button
-          class="registration__button button"
-          type="submit"
-          @click="registration"
-        >
+        <button class="registration__button button" @click="registration">
           Submit
         </button>
       </div>
