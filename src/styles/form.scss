@@ -53,21 +53,15 @@
 		column-gap: 10px;
 		row-gap: 25px;
 		padding-top: 15px;
+		flex-wrap: wrap;
 		@media (max-width: 680px) {
 		padding-top: 0px;
 		flex-direction: row;
 	}
-		@media (max-width: 500px) {
-		flex-wrap: wrap;
-		}
 	}
 	&__button {
 		align-self: end;
 		width: 100%;
-		max-width: 300px;
-		@media (max-width: 500px) {
-			max-width: 125px;
-		}
 	}
 }
 

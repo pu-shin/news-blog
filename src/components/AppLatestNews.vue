@@ -42,9 +42,10 @@
 </template>
 
 <script>
-import { HTTP } from "@/axios";
+// import { HTTP } from "@/axios";
 import { mapActions, mapState } from "vuex";
 import { getStorage, ref as storageRef, deleteObject } from "firebase/storage";
+import { getDatabase, ref as databaseRef, remove } from "@firebase/database";
 
 export default {
   data() {
@@ -63,8 +64,11 @@ export default {
     },
     async removeNews(item) {
       try {
+        // await HTTP.delete(`/news/${item.id}.json`);
         // Delete from Database
-        await HTTP.delete(`/news/${item.id}.json`);
+        const db = getDatabase();
+        const newsRef = databaseRef(db, `/news/${item.id}`);
+        await remove(newsRef);
         // Delete from Storage
         const storage = getStorage();
         const desertRef = storageRef(storage, `/images/${item.imageName}`);

@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
-import { HTTP } from '@/axios';
-import { getDatabase, ref, query, limitToLast, onValue } from "firebase/database";
+// import { HTTP } from '@/axios';
+import { getDatabase, update, push, child, ref, query, limitToLast, onValue } from "firebase/database";
 
 export default createStore({
 	state() {
@@ -31,12 +31,21 @@ export default createStore({
 		},
 		async addOwnNews(context, payload) {
 			try {
-				const response = await HTTP.post('/news.json', payload);
+				//const response = await HTTP.post('/news.json', payload);
+				const db = getDatabase();
+				// Get a key for a new Post.
+				const newPostKey = push(child(ref(db), 'news')).key;
+				// Write the new news data simultaneously in the news list.
+				const updates = {};
+				updates['/news/' + newPostKey] = payload;
+				await update(ref(db), updates);
 			} catch (error) {
 				console.log(error);
 			}
 		},
-		setNews({ state, commit }, amount) {
+
+
+		setNews({ commit }, amount) {
 			const db = getDatabase();
 			const recentPostsRef = query(ref(db, 'news/'), limitToLast(amount));
 			onValue(recentPostsRef, (posts) => {

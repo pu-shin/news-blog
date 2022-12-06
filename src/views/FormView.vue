@@ -181,12 +181,16 @@ export default {
     },
 
     async sendImageToStorage() {
-      const storage = getStorage();
-      const fileName = Date.now() + ".jpg";
-      this.imageName = fileName;
-      const storageRef = ref(storage, `images/${fileName}`);
-      await uploadBytes(storageRef, this.file);
-      this.url = await getDownloadURL(ref(storage, `/images/${fileName}`));
+      try {
+        const storage = getStorage();
+        const fileName = Date.now() + ".jpg";
+        this.imageName = fileName;
+        const storageRef = ref(storage, `images/${fileName}`);
+        await uploadBytes(storageRef, this.file);
+        this.url = await getDownloadURL(ref(storage, `/images/${fileName}`));
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     async uploadNews() {
