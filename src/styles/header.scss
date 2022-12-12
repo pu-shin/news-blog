@@ -15,9 +15,23 @@
 		min-height: 80px;
 		align-items: center;
 		column-gap: 30px;
-	}
+		@media (max-width: 480px) {
+			min-height: 50px;
+			}
+		}
+	
 
-	&__logo {}
+	&__logo {
+		height: 50px;
+		width: auto;
+		@media (max-width: 480px) {
+			height: 35px;
+		}
+	}
+		img {
+			height: 100%;
+			width: 100%;
+		}
 
 	&__navigation {
 		display: inline-flex;

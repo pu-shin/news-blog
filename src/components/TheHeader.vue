@@ -2,7 +2,7 @@
   <header class="header" :class="{ 'menu-open': openMenu }">
     <div class="header__container">
       <div class="header__logo">
-        <img src="../assets/logo/logo-black.svg" alt="logo" />
+        <img src="../assets/logo/reineke.png" alt="logo" />
       </div>
       <nav class="header__navigation">
         <router-link to="/" class="header__title">Home</router-link>
@@ -38,28 +38,34 @@
 
 <script>
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import AppPopup from "@/components/AppPopup.vue";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   mounted() {
-    onAuthStateChanged(getAuth(), (user) => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        localStorage.setItem("auth", "true");
-        this.isLoggedIn = JSON.parse(localStorage.getItem("auth"));
+        if (user.emailVerified) {
+          localStorage.setItem("auth", "true");
+          this.setEmailVerified(JSON.parse(localStorage.getItem("auth")));
+        }
       } else {
         localStorage.setItem("auth", "false");
-        this.isLoggedIn = JSON.parse(localStorage.getItem("auth"));
+        this.setEmailVerified(JSON.parse(localStorage.getItem("auth")));
       }
     });
   },
   data() {
     return {
-      isLoggedIn: JSON.parse(localStorage.getItem("auth")) || false,
       openMenu: false,
     };
   },
   methods: {
+    ...mapMutations(["setEmailVerified"]),
     handleSignOut() {
-      signOut(getAuth()).then(() => {
+      const auth = getAuth();
+      signOut(auth).then(() => {
         this.$router.push("/");
       });
     },
@@ -69,6 +75,12 @@ export default {
     removeMenu() {
       this.openMenu = false;
     },
+  },
+  computed: {
+    ...mapState(["isLoggedIn"]),
+  },
+  components: {
+    AppPopup,
   },
 };
 </script>

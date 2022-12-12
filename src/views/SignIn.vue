@@ -17,21 +17,15 @@
         />
         <p class="sign-in__message message" v-if="errMsg">{{ errMsg }}</p>
         <button class="sign-in__button button" @click="login">Submit</button>
-        <button class="sign-in__button button" @click="signInWithGoogle">
-          Sign In With Google
-        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { mapMutations, mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -41,10 +35,14 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["setEmailVerified"]),
     login() {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then((data) => {
+          if (!auth.currentUser.emailVerified) signOut();
+          localStorage.setItem("auth", "true");
+          this.setEmailVerified(JSON.parse(localStorage.getItem("auth")));
           console.log("Successfully signet in!");
           this.$router.push("/");
         })
@@ -60,24 +58,9 @@ export default {
               this.errMsg = "* Incorrect password";
               break;
             default:
-              this.errMsg = "* Email or password was incorrect";
+              this.errMsg = "* Confirm email address";
               break;
           }
-        });
-    },
-    signInWithGoogle() {
-      const auth = getAuth();
-      const provider = new GoogleAuthProvider();
-      provider.setCustomParameters({
-        prompt: "select_account",
-      });
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          console.log("Successfully signet in!");
-          this.$router.push("/");
-        })
-        .catch((error) => {
-          console.log(error);
         });
     },
   },

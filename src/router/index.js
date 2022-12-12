@@ -41,10 +41,15 @@ function getCurrentUser() {
 			getAuth(),
 			(user) => {
 				removeListener();
-				resolve(user);
+				if (!user)
+					resolve(user)
+				else {
+					resolve(user.emailVerified)
+				}
 			},
 			reject
 		)
+
 	})
 }
 
@@ -53,7 +58,7 @@ router.beforeEach(async (to, from, next) => {
 		if (await getCurrentUser()) {
 			next();
 		} else {
-			next("/sign-in");
+			next("/registration");
 		}
 	} else {
 		next();

@@ -8,6 +8,8 @@ export default createStore({
 			news: [],
 			loading: false,
 			dataLength: null,
+			isLoggedIn: JSON.parse(localStorage.getItem("auth")),
+			isActivePopup: false,
 		}
 	},
 	getters: {
@@ -21,6 +23,15 @@ export default createStore({
 		},
 		showLoader(state, payload) {
 			state.loading = payload;
+		},
+		setEmailVerified(state, payload) {
+			state.isLoggedIn = payload;
+		},
+		changePopupProperty(state, payload) {
+			state.isActivePopup = true;
+			setTimeout(() => {
+				state.isActivePopup = false;
+			}, 3000);
 		},
 	},
 
@@ -44,7 +55,6 @@ export default createStore({
 			}
 		},
 
-
 		setNews({ commit }, amount) {
 			const db = getDatabase();
 			const recentPostsRef = query(ref(db, 'news/'), limitToLast(amount));
@@ -60,6 +70,7 @@ export default createStore({
 				commit('showLoader', false)
 			});
 		},
+
 		getNewsLength({ commit }) {
 			const db = getDatabase();
 			const recentPostsRef = query(ref(db, 'news/'));

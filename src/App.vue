@@ -9,11 +9,17 @@
     </main>
     <the-footer></the-footer>
   </div>
+  <transition name="fade-popup">
+    <app-popup v-if="isActivePopup"
+      >we have sent you a confirmation email</app-popup
+    >
+  </transition>
 </template>
 
 <script>
 import TheHeader from "@/components/TheHeader.vue";
 import TheFooter from "@/components/TheFooter.vue";
+import AppPopup from "@/components/AppPopup.vue";
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -28,11 +34,12 @@ export default {
     ...mapActions(["unloadNews"]),
   },
   computed: {
-    ...mapState(["loading"]),
+    ...mapState(["loading", "isActivePopup"]),
   },
   components: {
     TheHeader,
     TheFooter,
+    AppPopup,
   },
 };
 </script>

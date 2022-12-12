@@ -19,13 +19,24 @@
         <button class="registration__button button" @click="registration">
           Submit
         </button>
+        <button class="sign-in__button button" @click="signInWithGoogle">
+          Continue with google
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  sendEmailVerification,
+  signOut,
+} from "firebase/auth";
+import { mapMutations } from "vuex";
 
 export default {
   data() {
@@ -36,12 +47,18 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["changePopupProperty"]),
     registration() {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.email, this.password)
         .then((data) => {
           console.log("Successfully registered!");
-          this.$router.push("/");
+          sendEmailVerification(auth.currentUser).then(() => {
+            console.log("Email verification sent!");
+          });
+          signOut(auth);
+          this.changePopupProperty();
+          this.$router.push("/sign-in");
         })
         .catch((error) => {
           console.log(error.message);
@@ -61,6 +78,21 @@ export default {
           }
         });
     },
+    signInWithGoogle() {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({
+        prompt: "select_account",
+      });
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          console.log("Successfully signet in!");
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -68,3 +100,5 @@ export default {
 
 <style scoped>
 </style>
+
+

@@ -3,10 +3,10 @@
     <div class="footer__container">
       <div class="footer__title title-footer">
         <div class="title-footer__image">
-          <img src="../assets/logo/logo-white.svg" alt="logo" />
+          <img src="../assets/logo/reineke.png" alt="logo" />
         </div>
         <div class="title-footer__label label">
-          <span>© 2018 Noiceland™, all rights reserved</span>
+          <span>© 2022 Pu-shin news-blog</span>
         </div>
       </div>
     </div>
