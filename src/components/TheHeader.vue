@@ -38,7 +38,6 @@
 
 <script>
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import AppPopup from "@/components/AppPopup.vue";
 import { mapState, mapMutations } from "vuex";
 
 export default {
@@ -78,9 +77,6 @@ export default {
   },
   computed: {
     ...mapState(["isLoggedIn"]),
-  },
-  components: {
-    AppPopup,
   },
 };
 </script>
