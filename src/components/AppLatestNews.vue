@@ -13,16 +13,26 @@
             >
               <div class="card__image">
                 <img :src="item.image" alt="" />
-                <button
-                  class="card__remove-item"
-                  @click="removeNews(item)"
-                ></button>
+                <div class="card__actions">
+                  <button
+                    v-if="item.uid === uid"
+                    class="card__remove-item"
+                    @click="removeNews(item)"
+                  ></button>
+                  <button
+                    class="card__read-item"
+                    @click="changeSelectedNews(item)"
+                  ></button>
+                </div>
               </div>
               <div class="card__body body-card">
                 <span class="body-card__label label">{{ item.type }}</span>
                 <h1 class="body-card__title title">
                   {{ item.title }}
                 </h1>
+                <app-accordion>
+                  {{ item.desc }}
+                </app-accordion>
                 <span class="body-card__author author">{{ item.author }}</span>
               </div>
             </div>
@@ -43,7 +53,8 @@
 
 <script>
 // import { HTTP } from "@/axios";
-import { mapActions, mapState } from "vuex";
+import AppAccordion from "./AppAccordion.vue";
+import { mapState, mapMutations, mapActions } from "vuex";
 import { getStorage, ref as storageRef, deleteObject } from "firebase/storage";
 import { getDatabase, ref as databaseRef, remove } from "@firebase/database";
 
@@ -52,6 +63,7 @@ export default {
     return {};
   },
   methods: {
+    ...mapMutations(["changeSelectedNews"]),
     ...mapActions(["setNews", "getNewsLength"]),
     //transition fix
     beforeLeave(el) {
@@ -73,6 +85,7 @@ export default {
         const storage = getStorage();
         const desertRef = storageRef(storage, `/images/${item.imageName}`);
         await deleteObject(desertRef);
+        this.changeSelectedNews(null);
         console.log("Successful removal");
       } catch (error) {
         console.log(error);
@@ -80,14 +93,14 @@ export default {
     },
   },
   computed: {
-    ...mapState(["news", "dataLength"]),
+    ...mapState(["news", "dataLength", "uid"]),
   },
   watch: {
     news() {
       this.getNewsLength();
     },
   },
-  components: {},
+  components: { AppAccordion },
 };
 </script>
 

@@ -7,6 +7,7 @@
           <div class="form__row">
             <label class="form__label" for="type">type</label>
             <input
+              maxlength="30"
               class="form__item item"
               type="text"
               id="type"
@@ -17,6 +18,7 @@
           <div class="form__row">
             <label class="form__label" for="author">Author</label>
             <input
+              maxlength="30"
               class="form__item item"
               type="text"
               id="author"
@@ -28,6 +30,7 @@
         <div class="form__row">
           <label class="form__label" for="title">Title</label>
           <input
+            maxlength="70"
             class="form__item form__item item"
             type="text"
             id="title"
@@ -38,6 +41,7 @@
         <div class="form__row">
           <label class="form__label" for="description">Description</label>
           <textarea
+            maxlength="1000"
             class="form__item form__textarea item"
             type="desc"
             id="title"
@@ -87,6 +91,8 @@
             <button
               class="form__button button"
               type="button"
+              :disabled="!checkValidForm"
+              :class="{ form__button_invalid: !checkValidForm }"
               @click="preview = !preview"
             >
               Preview
@@ -94,6 +100,8 @@
             <button
               class="form__button button"
               type="submit"
+              :disabled="!checkValidForm"
+              :class="{ form__button_invalid: !checkValidForm }"
               @click="uploadNews()"
             >
               Add news
@@ -127,7 +135,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import AppDropZone from "../components/AppDropZone.vue";
 import AppTopNews from "../components/AppTopNews.vue";
@@ -165,6 +173,7 @@ export default {
         ...this.objNews,
         image: this.url,
         imageName: this.imageName,
+        uid: this.uid,
       };
       this.addOwnNews(dataNews);
       this.clearInputs();
@@ -211,8 +220,19 @@ export default {
     },
   },
   computed: {
+    ...mapState(["uid"]),
     limitImages() {
       return this.images.length > 0;
+    },
+    checkValidForm() {
+      const { type, author, title, desc } = this.objNews;
+      return type && author && title && desc && this.limitImages ? true : false;
+    },
+  },
+  watch: {
+    checkValidForm(value) {
+      console.log(value);
+      this.preview = value ? this.preview : false;
     },
   },
   components: {

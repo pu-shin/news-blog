@@ -24,7 +24,7 @@
 
 <script>
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { mapMutations, mapState } from "vuex";
+import { mapMutations } from "vuex";
 
 export default {
   data() {
@@ -35,14 +35,16 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setEmailVerified"]),
+    ...mapMutations(["setEmailVerified", "setUid"]),
     login() {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then((data) => {
           if (!auth.currentUser.emailVerified) signOut();
           localStorage.setItem("auth", "true");
-          this.setEmailVerified(JSON.parse(localStorage.getItem("auth")));
+          this.setEmailVerified(true);
+          localStorage.setItem("uid", data.user.uid);
+          this.setUid(data.user.uid);
           console.log("Successfully signet in!");
           this.$router.push("/");
         })

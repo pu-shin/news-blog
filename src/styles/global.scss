@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap");
 
 $mainColor: #000000;
-$fontFamily:  'Source Serif Pro';
+$fontFamily: "Source Serif Pro";
 $fontSize: 16px;
 
 #app {
@@ -15,11 +15,11 @@ $fontSize: 16px;
 	flex-direction: column;
 	overflow: hidden;
 	// Прижимаем footer
-	>main {
+	> main {
 		flex: 1 1 auto;
 	}
 	// Фикс для слайдеров
-	>* {
+	> * {
 		min-width: 0;
 	}
 }
@@ -28,16 +28,6 @@ $fontSize: 16px;
 	max-width: 1230px;
 	margin: 0px auto;
 	padding: 0px 15px;
-}
-
-[class*="__remove-item"] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	transform: translate(-5px, 5px);
-	width: 30px;
-	height: 30px;
-	background: no-repeat center url("../assets/icons/remove.svg");
 }
 
 .item {
@@ -76,7 +66,7 @@ $fontSize: 16px;
 }
 
 .label {
-	font-family: 'Libre Franklin';
+	font-family: "Libre Franklin";
 	font-size: 10px;
 	line-height: 1.2;
 	letter-spacing: 1px;
@@ -85,7 +75,7 @@ $fontSize: 16px;
 }
 
 .title {
-	font-family: 'Tenor Sans';
+	font-family: "Tenor Sans";
 	text-transform: uppercase;
 	color: $mainColor;
 	font-size: 24px;
@@ -93,38 +83,37 @@ $fontSize: 16px;
 }
 
 .desc {
-	font-family: 'Source Serif Pro';
+	font-family: "Source Serif Pro";
 	font-size: 16px;
 	line-height: 1.5;
 	color: #666666;
 }
 
 .author {
-	font-family: 'Libre Franklin';
+	font-family: "Libre Franklin";
 	font-weight: 700;
 	font-size: 10px;
 	line-height: 1.2;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	color: $mainColor;
-
 }
 .message {
 	color: red;
 }
 
-.hidden{
+.hidden {
 	visibility: hidden;
 }
 
-@import './null.scss';
-@import './header.scss';
-@import './top-news.scss';
-@import './latest-news.scss';
-@import './footer.scss';
-@import './form.scss';
-@import './registration.scss';
-@import './sign-in.scss';
-@import './load-file.scss';
-@import './loader.scss';
-@import './transition.scss';
+@import "./null.scss";
+@import "./header.scss";
+@import "./top-news.scss";
+@import "./latest-news.scss";
+@import "./footer.scss";
+@import "./form.scss";
+@import "./registration.scss";
+@import "./sign-in.scss";
+@import "./load-file.scss";
+@import "./loader.scss";
+@import "./transition.scss";

@@ -47,7 +47,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["changePopupProperty"]),
+    ...mapMutations(["changePopupProperty", "setUid"]),
     registration() {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.email, this.password)
@@ -86,6 +86,8 @@ export default {
       });
       signInWithPopup(auth, provider)
         .then((result) => {
+          localStorage.setItem("uid", result.user.uid);
+          this.setUid(result.user.uid);
           console.log("Successfully signet in!");
           this.$router.push("/");
         })

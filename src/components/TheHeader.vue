@@ -61,10 +61,12 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setEmailVerified"]),
+    ...mapMutations(["setEmailVerified", "setUid"]),
     handleSignOut() {
       const auth = getAuth();
       signOut(auth).then(() => {
+        localStorage.setItem("uid", "");
+        this.setUid("");
         this.$router.push("/");
       });
     },

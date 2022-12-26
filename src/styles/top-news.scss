@@ -1,11 +1,14 @@
 .top-news {
 	padding-top: 60px;
+	@media (max-width: 620.98px) {
+		display: none;
+	}
 	&__container {
 		display: flex;
-		@media (max-width: 768px) {
-		flex-wrap: wrap;
-		justify-content: center;
-		row-gap: 30px;
+		@media (max-width: 768.98px) {
+			flex-wrap: wrap;
+			justify-content: center;
+			row-gap: 30px;
 		}
 	}
 	&__image {
@@ -17,26 +20,27 @@
 			height: 100%;
 			object-fit: cover;
 		}
+		@media (min-width: 768.98px) and (max-width: 998.98px) {
+			flex-basis: 55%;
+			max-height: 375px;
+		}
 	}
-
 }
-
 .content-top-news {
 	flex: 0 1 480px;
 	max-width: 480px;
 	display: flex;
 	flex-direction: column;
-	padding: 5px 0px 0px 50px;
-	@media (max-width: 999px) {
-			padding: 5px 0px 0px 25px;
+	padding-left: 50px;
+	word-wrap: break-word;
+	@media (min-width: 768.98px) and (max-width: 998.98px) {
+		padding-left: 25px;
+		flex-basis: 45%;
 	}
-	@media (max-width: 999px) {
-		}
-	@media (max-width: 768px) {
+	@media (max-width: 768.98px) {
 		flex: 1 1 auto;
 		max-width: 100%;
 		padding: 0px;
-		word-wrap: break-word;
 	}
 
 	&__label {
@@ -46,7 +50,7 @@
 	}
 
 	&__title {
-		font-family: 'Tenor Sans';
+		font-family: "Tenor Sans";
 		font-size: 36px;
 		line-height: 1.17;
 		color: $mainColor;
@@ -55,11 +59,12 @@
 		}
 		@media (max-width: 998.98px) {
 			font-size: 28px;
-				}
+		}
 		@media (max-width: 767.98px) {
 			font-size: 26px;
 		}
-}
+	}
+
 	&__desc {
 		&:not(:last-child) {
 			margin-bottom: 28px;

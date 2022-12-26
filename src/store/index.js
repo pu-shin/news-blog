@@ -10,6 +10,8 @@ export default createStore({
 			dataLength: null,
 			isLoggedIn: JSON.parse(localStorage.getItem("auth")),
 			isActivePopup: false,
+			uid: localStorage.getItem("uid"),
+			selectedNews: null,
 		}
 	},
 	getters: {
@@ -32,6 +34,12 @@ export default createStore({
 			setTimeout(() => {
 				state.isActivePopup = false;
 			}, 3000);
+		},
+		setUid(state, payload) {
+			state.uid = payload;
+		},
+		changeSelectedNews(state, payload) {
+			state.selectedNews = payload;
 		},
 	},
 

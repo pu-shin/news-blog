@@ -1,19 +1,18 @@
-.fade-popup-enter-active {
-	transition:  all 0.5s ease-out;
+//top-news
+.fade-top-news-leave-active,
+.fade-top-news-enter-active {
+	transition: all 0.5s ease-out;
 }
 
-.fade-popup-leave-active {
-	transition:  all 0.5s ease-out 1s;
-}
-
-.fade-popup-enter-from,
-.fade-popup-leave-to {
+//latest-news
+.fade-top-news-enter-from,
+.fade-top-news-leave-to {
 	opacity: 0;
 }
 
 .fade-news-move,
 .fade-news-enter-active,
-.fade-news-leave-active{
+.fade-news-leave-active {
 	transition: all 0.8s ease;
 }
 .fade-news-enter-from,
@@ -21,5 +20,32 @@
 	opacity: 0;
 }
 .fade-news-leave-active {
-	 position: absolute;
- }
+	position: absolute;
+}
+
+//popup
+.fade-popup-enter-active {
+	transition: all 0.5s ease-out;
+}
+
+.fade-popup-leave-active {
+	transition: all 0.5s ease-out 1s;
+}
+
+.fade-popup-enter-from,
+.fade-popup-leave-to {
+	opacity: 0;
+}
+
+//accordion
+.accordion-enter-active,
+.accordion-leave-active {
+	transition: height 0.3s ease-out, opacity 0.3s ease-out;
+	overflow: hidden;
+}
+
+.accordion-enter-from,
+.accordion-leave-to {
+	height: 0 !important;
+	opacity: 0;
+}
