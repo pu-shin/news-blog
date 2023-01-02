@@ -208,6 +208,7 @@ export default {
         await this.sendImageToStorage();
         this.sendDataNews();
         console.log("Upload successful");
+        this.$router.push("/");
       } catch (error) {
         console.log(error);
       } finally {
@@ -231,7 +232,6 @@ export default {
   },
   watch: {
     checkValidForm(value) {
-      console.log(value);
       this.preview = value ? this.preview : false;
     },
   },

@@ -77,7 +77,8 @@
 
 .preview {
 	padding-top: 120px;
-	@media (max-width: 680px) {
+	@media (max-width: 620.98px) {
 		padding-top: 70px;
+		display: block;
 	}
 }

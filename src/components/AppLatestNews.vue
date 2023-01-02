@@ -15,9 +15,8 @@
                 <img :src="item.image" alt="" />
                 <div class="card__actions">
                   <button
-                    v-if="item.uid === uid"
                     class="card__remove-item"
-                    @click="removeNews(item)"
+                    @click="showModal(item)"
                   ></button>
                   <button
                     class="card__read-item"
@@ -49,18 +48,36 @@
       </button>
     </div>
   </section>
+
+  <teleport to="body">
+    <app-modal
+      :show="modal.show"
+      @close="modal.show = false"
+      @delete="removeNews(modal.item)"
+    >
+      <template #header>
+        <h3>Delete News ?</h3>
+      </template>
+    </app-modal>
+  </teleport>
 </template>
 
 <script>
 // import { HTTP } from "@/axios";
 import AppAccordion from "./AppAccordion.vue";
+import AppModal from "./AppModal.vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 import { getStorage, ref as storageRef, deleteObject } from "firebase/storage";
 import { getDatabase, ref as databaseRef, remove } from "@firebase/database";
 
 export default {
   data() {
-    return {};
+    return {
+      modal: {
+        item: {},
+        show: false,
+      },
+    };
   },
   methods: {
     ...mapMutations(["changeSelectedNews"]),
@@ -81,6 +98,7 @@ export default {
         const db = getDatabase();
         const newsRef = databaseRef(db, `/news/${item.id}`);
         await remove(newsRef);
+        this.modal.show = false;
         // Delete from Storage
         const storage = getStorage();
         const desertRef = storageRef(storage, `/images/${item.imageName}`);
@@ -91,6 +109,10 @@ export default {
         console.log(error);
       }
     },
+    showModal(item) {
+      this.modal.item = item;
+      this.modal.show = true;
+    },
   },
   computed: {
     ...mapState(["news", "dataLength", "uid"]),
@@ -100,7 +122,7 @@ export default {
       this.getNewsLength();
     },
   },
-  components: { AppAccordion },
+  components: { AppAccordion, AppModal },
 };
 </script>
 

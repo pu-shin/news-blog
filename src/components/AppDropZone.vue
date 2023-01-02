@@ -13,9 +13,7 @@
         class="dropzone__image"
         :class="{ 'dropzone__image-disabled': disabled }"
       ></div>
-      <button type="button" class="dropzone__button" v-if="!disabled">
-        {{ dropTitle }}
-      </button>
+      <button type="button" class="dropzone__button" v-if="!disabled"></button>
       <input
         class="dropzone__field"
         type="file"
@@ -57,13 +55,6 @@ export default {
       this.$refs["select-file"].value = "";
     },
   },
-  computed: {
-    dropTitle() {
-      return window.innerWidth < 680
-        ? "select image"
-        : "select or drag an image";
-    },
-  },
 };
 </script>
 
@@ -99,6 +90,13 @@ export default {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #666666;
+    &::before {
+      content: "select or drag an image";
+      display: block;
+      @media (max-width: 680.98px) {
+        content: "select image";
+      }
+    }
   }
 }
 
