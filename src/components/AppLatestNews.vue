@@ -17,6 +17,7 @@
                   <button
                     class="card__remove-item"
                     @click="showModal(item)"
+                    v-if="uid === item.uid"
                   ></button>
                   <button
                     class="card__read-item"
